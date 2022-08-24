@@ -35,7 +35,6 @@ This folder
 │
 └───data/
 │    └───thumos14/
-│    │	 └───annotations
 │    │	 └───i3d_features   
 │    └───...
 ```
