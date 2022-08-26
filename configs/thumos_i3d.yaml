@@ -1,44 +1,28 @@
-dataset_name: thumos
-train_split: ['validation']
-val_split: ['test']
-dataset: {
-  json_file: ./data/thumos14/annotations/thumos14.json,
-  feat_folder: ./data/thumos14/i3d_features,
-  file_prefix: ~,
-  file_ext: .npy,
-  num_classes: 20,
-  input_dim: 2048,
-  feat_stride: 4,
-  num_frames: 16,
-  trunc_thresh: 0.5,
-  crop_ratio: [0.9, 1.0],
-  max_seq_len: 2304,
-}
-model: {
-  n_mha_win_size: 19,
-}
-opt: {
-  learning_rate: 0.0001,
-  epochs: 40,
-  weight_decay: 0.0005,
-}
-loader: {
-  batch_size: 6,
-}
-train_cfg: {
-  init_loss_norm: 100,
-  clip_grad_l2norm: 1.0,
-  cls_prior_prob: 0.01,
-  center_sample: radius,
-  center_sample_radius: 1.5,
-}
-test_cfg: {
-  voting_thresh: 0.7,
-  pre_nms_topk: 2000,
-  max_seg_num: 200,
-  min_score: 0.001,
-  multiclass_nms: False,
-  ext_score_file: ./data/thumos14/annotations/thumos14_cls_scores.pkl,
-}
-output_folder: ckpt
+dataset_name: thumos14
 devices: [0, 1]
+dataset:
+  json_file: ./data/thumos14/annotations/thumos14.json
+  feat_folder: ./data/thumos14/i3d_features
+  num_classes: 20
+  num_frames: 16
+  input_dim: 2048
+  max_input: 2304
+
+model:
+  win_size: 19
+  freeze_bn: true
+  freeze_bn_affine: true
+
+training:
+  batch_size: 8
+  learning_rate: 1e-5
+  weight_decay: 1e-3
+  max_epoch: 40
+  focal_loss: true
+
+testing:
+  conf_thresh: 0.01
+  nms_thresh: 0.5
+  nms_sigma: 0.5
+  checkpoint_path: ./ckpt
+  output_path: ./output

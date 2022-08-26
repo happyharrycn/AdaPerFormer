@@ -26,7 +26,6 @@ The main components of this project are：
 ```bash
     pip install -r requirement.txt
 ```
-
 ## Data Preparation
 1. Download the original video data from [thuoms](https://www.crcv.ucf.edu/THUMOS14/download.html) and use the [I3D](https://github.com/piergiaj/pytorch-i3d) backbone to extract the features.
 2. Place I3D_features into the folder `./data`
@@ -42,15 +41,4 @@ This folder
 │    │	 └───i3d_features   
 │    │	 └───annotations   
 │    └───...
-```
-## Training and Test
-* Train our AdaPerFormer with I3D features. 
-
-```shell
-./src/train_thumos.sh
-```
-
-* Evaluate the trained model. 
-```shell
-./src/test_thumos.sh
 ```
