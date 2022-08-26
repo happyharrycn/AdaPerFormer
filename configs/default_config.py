@@ -86,12 +86,11 @@ def load_default_config():
     return config
 
 def _update_config(config):
-    # fill in derived fields
+    config["model"]["train_cfg"] = config["train_cfg"]
+    config["model"]["test_cfg"] = config["test_cfg"]
     config["model"]["input_dim"] = config["dataset"]["input_dim"]
     config["model"]["num_classes"] = config["dataset"]["num_classes"]
     config["model"]["max_seq_len"] = config["dataset"]["max_seq_len"]
-    config["model"]["train_cfg"] = config["train_cfg"]
-    config["model"]["test_cfg"] = config["test_cfg"]
     return config
 
 def load_config(config_file, defaults=DEFAULTS):
